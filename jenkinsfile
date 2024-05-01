@@ -71,7 +71,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-secret', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    echo "Credenciais de usuário: ${USERNAME}"
+                    echo "Credenciais de usuario: ${USERNAME}"
                     echo "Credenciais de senha: ${PASSWORD}"
                 }
                 input "Qual ambiente deseja deployar ${params.ENVIRONMENT}?"

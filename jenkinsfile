@@ -38,11 +38,12 @@ pipeline {
             }
         }
 
-        stage ('Deploy')
+        stage ('Deploy'){
             steps {
                 input "Qual ambiente deseja deployar ${params.ENVIRONMENT}?"
                 echo "O ambiente selecionado foi ${params.ENVIRONMENT}."
             }
+        }
     }
 
     post {

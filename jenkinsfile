@@ -7,6 +7,7 @@ pipeline {
 
     parameters {
         string(name: 'TESTE', defaultValue: 'qa', description: 'parametro para testes')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'staging', 'production'], description: 'ambientes para deploy')
     }
 
     options {
@@ -36,6 +37,12 @@ pipeline {
                 echo params.TESTE
             }
         }
+
+        stage ('Deploy')
+            steps {
+                input "Qual ambiente deseja deployar ${params.ENVIRONMENT}?"
+                echo "O ambiente selecionado foi ${params.ENVIRONMENT}."
+            }
     }
 
     post {

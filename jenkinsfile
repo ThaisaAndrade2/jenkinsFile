@@ -10,7 +10,9 @@ pipeline {
             steps {
                 echo 'Starting the pipeline'
             }
+        }
 
+        stage ('Print the token'){
             steps {
                 echo APP_TOKEN
             }

@@ -5,6 +5,17 @@ pipeline {
         APP_TOKEN = 'meu_token_pessoal'
     }
 
+    options {
+    
+    }
+
+    triggers {
+        gitPullRequest {
+            sourceBranch: 'main',
+            credentialsId: ''
+        }
+    }
+
     stages {
         stage ('Start') {
             steps {
@@ -16,6 +27,20 @@ pipeline {
             steps {
                 echo APP_TOKEN
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'The pipeline is running successfully'
+        }
+
+        failure {
+            echo 'Error in running the pipeline'
+        }
+
+        always {
+            echo 'Finished the pipeline execution'
         }
     }
 }

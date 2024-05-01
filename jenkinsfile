@@ -5,13 +5,17 @@ pipeline {
         APP_TOKEN = 'meu_token_pessoal'
     }
 
+    parameters {
+        string(name: 'TESTE', defaultValue: 'qa', description: 'parametro para testes')
+    }
+
     options {
         timeout(time: 1, unit: 'HOURS')
     }
 
     triggers {
-        //A cada 2 minutos será executado
-        cron "*/2 * * * *"
+        //A cada 20 minutos será executado
+        cron "*/20 * * * *"
     }
 
     stages {
@@ -24,6 +28,12 @@ pipeline {
         stage ('Print the token'){
             steps {
                 echo APP_TOKEN
+            }
+        }
+
+        stage ('Print parametro'){
+            steps {
+                echo params.TESTE
             }
         }
     }

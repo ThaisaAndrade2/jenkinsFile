@@ -1,9 +1,18 @@
 pipeline {
     agent any
+
+    environment {
+        APP_TOKEN = 'meu_token_pessoal'
+    }
+
     stages {
         stage ('Start') {
             steps {
                 echo 'Starting the pipeline'
+            }
+
+            steps {
+                echo APP_TOKEN
             }
         }
     }

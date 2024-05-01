@@ -38,6 +38,18 @@ pipeline {
             }
         }
 
+        stage ('Tests'){
+            when {
+                expression {
+                    params.ENVIRONMENT == 'qa'
+                }
+            }
+
+            steps {
+                echo "Executando os testes no ambiente de ${params.ENVIRONMENT}"
+            }
+        }
+
         stage ('Deploy'){
             steps {
                 input "Qual ambiente deseja deployar ${params.ENVIRONMENT}?"

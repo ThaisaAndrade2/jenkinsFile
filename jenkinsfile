@@ -6,14 +6,7 @@ pipeline {
     }
 
     options {
-    
-    }
-
-    triggers {
-        gitPullRequest {
-            sourceBranch: 'main',
-            credentialsId: ''
-        }
+        timeout(time: 1, unit: 'HOURS')
     }
 
     stages {

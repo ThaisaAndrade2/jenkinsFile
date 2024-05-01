@@ -26,16 +26,18 @@ pipeline {
             }
         }
 
-        parallel {
-            stage ('Print the token'){
-                steps {
-                    echo APP_TOKEN
+        stage ('Print infos') {
+            parallel {
+                stage ('Print the token'){
+                    steps {
+                        echo APP_TOKEN
+                    }
                 }
-            }
 
-            stage ('Print parametro'){
-                steps {
-                    echo params.TESTE
+                stage ('Print parametro'){
+                    steps {
+                        echo params.TESTE
+                    }
                 }
             }
         }

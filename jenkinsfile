@@ -46,14 +46,17 @@ pipeline {
             }
 
             parallel {
-                steps {
-                    echo "Executando os testes de integração no ambiente de ${params.ENVIRONMENT}"
-                }
-            
-                steps {
-                    echo "Executando os testes end to end no ambiente de ${params.ENVIRONMENT}"
+                stage ('Teste de integração'){
+                    steps {
+                        echo "Executando os testes de integração no ambiente de ${params.ENVIRONMENT}"
+                    }
                 }
 
+                stage ('Teste end to end'){
+                    steps {
+                        echo "Executando os testes end to end no ambiente de ${params.ENVIRONMENT}"
+                    }
+                }
             }
         }
 

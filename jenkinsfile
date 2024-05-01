@@ -26,35 +26,38 @@ pipeline {
             }
         }
 
-        stage ('Print the token'){
-            steps {
-                echo APP_TOKEN
+        parallel {
+            stage ('Print the token'){
+                steps {
+                    echo APP_TOKEN
+                }
             }
-        }
 
-        stage ('Print parametro'){
-            steps {
-                echo params.TESTE
+            stage ('Print parametro'){
+                steps {
+                    echo params.TESTE
+                }
             }
         }
 
         stage ('Tests'){
-            when {
-                expression {
-                    params.ENVIRONMENT == 'qa'
-                }
-            }
-
-            parallel {
-                stage ('Teste de integração'){
-                    steps {
-                        echo "Executando os testes de integração no ambiente de ${params.ENVIRONMENT}"
+            matrix {
+                axes {
+                    axis {
+                        name 'Test_Type'
+                        values 'Integration', 'End to End'
                     }
                 }
-
-                stage ('Teste end to end'){
-                    steps {
-                        echo "Executando os testes end to end no ambiente de ${params.ENVIRONMENT}"
+                stages {
+                    stage ('Run ${Test_Type} Tests') {
+                        when {
+                            expression {
+                                params.ENVIRONMENT == 'qa'
+                            }
+                        }
+                        steps {
+                            echo "Executando os testes ${Test_Type} no ambiente de ${params.ENVIRONMENT}"
+                        }
                     }
                 }
             }

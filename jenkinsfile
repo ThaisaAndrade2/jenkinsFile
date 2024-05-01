@@ -9,6 +9,11 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 
+    triggers {
+        //A cada 10 minutos será executado
+        cron "*/10 * * * *"
+    }
+
     stages {
         stage ('Start') {
             steps {

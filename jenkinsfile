@@ -10,8 +10,8 @@ pipeline {
     }
 
     triggers {
-        //A cada 10 minutos será executado
-        cron "*/10 * * * *"
+        //A cada 2 minutos será executado
+        cron "*/2 * * * *"
     }
 
     stages {

@@ -45,8 +45,15 @@ pipeline {
                 }
             }
 
-            steps {
-                echo "Executando os testes no ambiente de ${params.ENVIRONMENT}"
+            parallel {
+                steps {
+                    echo "Executando os testes de integração no ambiente de ${params.ENVIRONMENT}"
+                }
+            
+                steps {
+                    echo "Executando os testes end to end no ambiente de ${params.ENVIRONMENT}"
+                }
+
             }
         }
 

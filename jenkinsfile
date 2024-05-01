@@ -66,7 +66,14 @@ pipeline {
         }
 
         stage ('Deploy'){
+            environment {
+                MY_SECRET = credentials('my-secret')
+            }
             steps {
+                withCredentials([usernamePassword(credentialsId: 'my-secret', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    echo "Credenciais de usuário: ${USERNAME}"
+                    echo "Credenciais de senha: ${PASSWORD}"
+                }
                 input "Qual ambiente deseja deployar ${params.ENVIRONMENT}?"
                 echo "O ambiente selecionado foi ${params.ENVIRONMENT}."
             }
